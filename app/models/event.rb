@@ -12,6 +12,7 @@ class Event < ApplicationRecord
  has_many :upload_files, dependent: :destroy
 
  enum status: { draft: 0, published: 1 }
+ 
 
  # geocoded_by :address
  # after_validation :geocode
