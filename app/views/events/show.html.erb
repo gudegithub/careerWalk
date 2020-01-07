@@ -91,3 +91,35 @@
     </div>
   </div>
 </div>
+
+
+
+
+<table class="table table-hover boards__table">
+  <thead class="thead-dark">
+    <tr>
+      <th>参加者指名</th>
+      <th>出席状態</th>
+      <!-- <th>作成者</th>
+      <th>作成日時</th>
+      <th>更新日時</th>
+      <th></th>
+      <th></th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @event.users.each do |user| %>
+    <% ue = user.user_events.find_by(event_id: @event.id) %>
+      <tr>
+        <td><%= user.name %></td>
+        <td>
+          <% if ue.before_join? %>
+            <%= link_to '出席', {controller: 'user_events', action: 'check_attend'}, class: 'btn btn-outline-dark', method: :patch,event_id: @event.id, user_id: user.id %>
+          <% else %>
+            <%= link_to '出席取り消し', {controller: 'user_events', action: 'check_attend'}, class: 'btn btn-outline-dark', method: :patch, event_id: @event.id, user_id: user.id %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   resources :events
   resources :users
   resources :user_events, only: [:create, :destroy]
+  patch 'check_attend', to: 'user_events#check_attend'
 end
