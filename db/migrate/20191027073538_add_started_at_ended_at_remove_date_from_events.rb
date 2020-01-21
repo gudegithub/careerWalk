@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddStartedAtEndedAtRemoveDateFromEvents < ActiveRecord::Migration[5.2]
   def change
     add_column :events, :started_at, :datetime

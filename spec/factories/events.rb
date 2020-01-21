@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 FactoryBot.define do
   factory :event do
     title { "Test event" }
@@ -5,5 +6,7 @@ FactoryBot.define do
     started_at { Time.now }
     ended_at { Time.now }
     description { "テストイベントの詳細" }
+    
+
   end
 end

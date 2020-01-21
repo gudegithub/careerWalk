@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 #ユーザー
 30.times do |n|
   name  = "User#{n+1}"
@@ -21,3 +22,13 @@ end
                description: description,
                ended_at: Time.now)
 end
+
+#カテゴリー
+Category.create([
+    { name: 'ruby' },
+    { name: 'ruby_on_rails4' },
+    { name: 'ruby_on_Rails5' },
+    { name: 'python2' },
+    { name: 'python3' },
+    { name: 'django2' }
+  ])

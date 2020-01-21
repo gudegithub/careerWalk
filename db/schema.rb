@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_17_092235) do
+ActiveRecord::Schema.define(version: 2020_01_07_114124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,18 @@ ActiveRecord::Schema.define(version: 2019_12_17_092235) do
     t.string "address"
     t.text "description"
     t.integer "status", default: 0, null: false
+    t.integer "adminUser"
     t.index ["upload_file_id"], name: "index_events_on_upload_file_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.integer "owner"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description"
+    t.string "image"
   end
 
   create_table "internships", id: :serial, force: :cascade do |t|
@@ -84,6 +95,30 @@ ActiveRecord::Schema.define(version: 2019_12_17_092235) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "room_id"
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "message"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "room_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
   create_table "upload_files", force: :cascade do |t|
     t.string "default_file_name", limit: 200
     t.string "managed_file_name", limit: 200
@@ -104,6 +139,18 @@ ActiveRecord::Schema.define(version: 2019_12_17_092235) do
     t.index ["user_id"], name: "index_user_events_on_user_id"
   end
 
+  create_table "user_groups", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "groupJoined_id"
+    t.integer "groupJoiner_id"
+    t.index ["group_id"], name: "index_user_groups_on_group_id"
+    t.index ["user_id", "group_id"], name: "index_user_groups_on_user_id_and_group_id", unique: true
+    t.index ["user_id"], name: "index_user_groups_on_user_id"
+  end
+
   create_table "user_jobs", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "job_id"
@@ -111,6 +158,15 @@ ActiveRecord::Schema.define(version: 2019_12_17_092235) do
     t.datetime "updated_at", null: false
     t.index ["job_id"], name: "index_user_jobs_on_job_id"
     t.index ["user_id"], name: "index_user_jobs_on_user_id"
+  end
+
+  create_table "user_rooms", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_user_rooms_on_room_id"
+    t.index ["user_id"], name: "index_user_rooms_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -136,8 +192,12 @@ ActiveRecord::Schema.define(version: 2019_12_17_092235) do
   add_foreign_key "event_categories", "events"
   add_foreign_key "job_categories", "categories"
   add_foreign_key "job_categories", "jobs"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "user_events", "events"
   add_foreign_key "user_events", "users"
   add_foreign_key "user_jobs", "jobs"
   add_foreign_key "user_jobs", "users"
+  add_foreign_key "user_rooms", "rooms"
+  add_foreign_key "user_rooms", "users"
 end

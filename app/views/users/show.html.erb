@@ -1,83 +1,69 @@
-<div class="user_wrapper">
-  <div class="container">
-    <div class="main_content">
-      <div class="user_status">
-        <div class="status_content user_name">
-          <img src=<%= @user.image %> class= "icon_image" >
-          <p><%= @user.name %></p>
-        </div>
-        <div class="status_content user_events_count">
-          <p><%= icon "", "" %> <%= @events.count %></p>
-          <p>参加イベント数</p>
-        </div>
-        <div class="status_content user_level">
-          <%= icon "", "" %>
-          <p class="level">Lv.30</p>
-        </div>
-      </div>
-      <div class="events">
-        <% last_date = nil  %>
-        <% @events.each do |event| %>
-          <% event_date =  event.started_at.to_date  %>
-          <% if event_date != last_date  %>
-            <div class="date_bar">
-              <%= l(event_date, format: :long)  %>
-            </div>
-            <% end %>
-            <% last_date = event_date  %>
-          <div class="event">
-            <div class="event_image">
-              <%= link_to(event_path(event)) do %>
-                <% if event.image  %>
-                  <%= image_tag event.image, width: "220px", height: "130xp"  %>
-                <% elsif event.site %>
-                  <div class="site_logo">
-                    <% if event.site == "doorkeeper" %>
-                      <%= image_tag "doorkeeper.png", width: "140px", height: "30px" %>
-                    <% elsif event.site == "connpass" %>
-                      <%= image_tag("connpass.png", width: "120px", height: "40px") %>
-                    <% end %>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-            <div class="event_detail">
-              <%= link_to "#{event.title}",event_path(event), class: "event_title" %>
-              <div class="event_site">
-              </div>
-              <div class="event_time">
-                <%= l(event.started_at, format: :just_time) %><span>~</span>
-              </div>
-              <div class="event_address">
-                <%= icon "fas", "map-marker-alt" %><%= event.location  %>
-              </div>
-              <div class="event_owner">
-                <p><%= event.owner %></p>
-              </div>
-            </div>
+<div class="portfolio_wrapper">
+
+      <div class="portfolio_left">
+
+        <div class="portfolio_userScore">
+          <div class="portfolio_userScore_userName">
+            <img src=<%=current_user.image %> alt="">
+            <p><%=current_user.name%></p>
           </div>
-        <% end  %>
-        <% if @events.empty? %>
-          <h3>参加したイベントはありません</h3>
-        <% end  %>
-      </div>
-    </div>
-    <div class="side_content">
-      <div class="user_profile">
-        <div class="user_profile_image">
-          <img src=<%= @user.image%> class = "profile_icon_image">
+          <div class="portfolio_userScore_number">
+            <h3><%= icon "", "" %> <%= @events.count %></h3>
+            <p>参加イベント数</p>
+
+          </div>
+          <div class="portfolio_userScore_level">
+            <h3>Lv. <span>53</span></h3>
+          </div>
         </div>
-        <h3><%= @user.name %></h3>
-        <p class="user_profile_detail">
-          <%= @user.profile %>
-        </p>
-        <%= link_to "ポートフォリオを見る", "#{@user.id}/portfolio", class: "user_portfolio_btn" %>
-        <div class="user_menu">
-          <% if @user == current_user %>
-            <%= link_to "プロフィールを編集する", profile_edit_path, class: "user_edit_btn" %>
-          <% end %>
+
+        <div class="portfolio_list">
+          <h2>ポートフォリオ一覧</h2>
+          <div class="portfolio_list_container">
+
+            <div class="portfolio_list_item">
+              <img src="paper.jpg" alt="">
+              <h3>sample web site </h3>
+              <p>はじめてhtml/css/JavaScriptを活用してサンプルページを作成しました。</p>
+              <a href="#">https://samplePage.com/sample1</a>
+            </div>
+
+
+          </div>
+
         </div>
+
       </div>
+
+      <div class="portfolio_right">
+
+        <div class="portfolio_user">
+
+          <img src=<%=current_user.image%> alt="">
+          <h2><%=current_user.name%></h2>
+          <p>Ruby on Railsを勉強している関西の学生です。自分でサービス開発ができるようになりたいです。</p>
+          <div><p><%=link_to "参加イベント一覧", user_joiningEvent_path, :style=>"color:white;"%></p></div>
+          <a href="#" class="portfolio_user_linkToEdit"><div><p>ポートフォリオ編集</p></div></a>
+        </div>
+
+        <div class="portfolio_communityList">
+          <h2>参加コミュニティ</h2>
+          <ul>
+            <li>
+              <% @groups.each do |group| %>
+              <img src="logo.png" alt="">
+              <a href="#"><p><%=group.name %></p></a>
+            </li>
+          
+            <% end %>
+          </ul>
+        </div>
+        <%= button_to "コミュニティ一覧",groups_path,:method => :get %>
+        <%= button_to "コミュニティを作成する", new_group_path, :method => :get %>
+        <%= button_to "イベント作成", new_event_path, :method => :get  %>
+
+      <%= button_to "下書きを見る" ,confirm_events_path,:method => :get%>
+
+      </div>
+
     </div>
-  </div>
-</div>

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateInternships < ActiveRecord::Migration[5.0]
   def change
     create_table :internships do |t|

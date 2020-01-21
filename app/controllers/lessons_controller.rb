@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class LessonsController < ApplicationController
    before_action :authenticate_user! ,only: [:new, :create]
    def index

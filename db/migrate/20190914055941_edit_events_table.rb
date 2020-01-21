@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class EditEventsTable < ActiveRecord::Migration[5.2]
   def change
     add_column :events, :publish_start_at, :timestamp

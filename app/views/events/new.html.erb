@@ -18,17 +18,32 @@
       </div>
       <div class="form-group">
         <%= form.label :started_at %>
+        <br>
         <%= form.datetime_select :started_at, {} %>
       </div>
       <div class="form-group">
-        <%= form.label :ended_at %>
+        <%= form.label :ended_at,"終了時間" %>
+        <br>
         <%= form.datetime_select :ended_at, {} %>
       </div>
       <div class="form-group">
         <%= form.label :description %>
         <%= form.text_area :description, placeholder: "詳細", class: "form-control" %>
       </div>
-      <%= form.submit "作成", class: "btn btn-info"  %>
+      <div class="form-group">
+          <%= form.fields_for :category do |c| %>
+            <%= c.label 'カテゴリー', :category %>
+            <br>
+            <%= select :category, :name, Category.all.map { |category| category.name }, {include_blank: '選択して下さい', class: 'mySelect2',  multiple: true } %>
+          <% end %>
+      </div>
+      <select name="event[status]" id="event_status">
+        <option selected="selected" value="draft">下書きとして保存する</option>
+        <option value="published">公開する</option>
+      </select>
+      <%= form.submit "イベント作成", class: "btn btn-info" %>
     <% end %>
+
+
   </div>
 </div>

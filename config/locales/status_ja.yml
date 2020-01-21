@@ -1,0 +1,6 @@
+ja:
+  enums:
+    blog:
+      status:
+        draft: '下書きとして保存する'
+        published: '公開する'

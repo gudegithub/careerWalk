@@ -1,0 +1,300 @@
+// Place all the styles related to the rooms controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@charset "UTF-8";
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}
+
+/* ここまでMaterial Icons */
+.community_container {
+  width: 100vw;
+}
+
+.community_container .community_headerImage_wrapper {
+  width: 100vw;
+  height: 170px;
+}
+
+.community_container .community_profile_wrapper {
+  width: 100vw;
+  height: 220px;
+}
+
+.community_headerImage_wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.community_headerImage_wrapper .community_headerImage {
+  width: 100vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.community_profile_wrapper .community_profile {
+  height: 300px;
+  width: 80%;
+  margin-left: 50%;
+  transform: translateX(-50%) translateY(-70px);
+}
+
+.community_profile_wrapper .community_profile img {
+  float: left;
+}
+
+.community_profile_wrapper .community_profile_text {
+  float: left;
+  width: 30vw;
+  margin-left: 15px;
+  overflow-x: hidden;
+}
+
+.community_profile_wrapper .community_profile_text h1 {
+  margin: 80px 0 5px 0;
+}
+
+.community_profile_wrapper .community_profile_text a {
+  margin-right: 3px;
+  color: #000000;
+  text-decoration: none;
+}
+
+.community_profile_wrapper .community_profile_text a .material-icons {
+  font-size: 16px;
+  transform: translateY(2px);
+}
+
+.community_main_wrapper {
+  width: 100vw;
+  display: flex;
+}
+
+.community_main_wrapper .community_main_left {
+  width: 75vw;
+}
+
+.community_main_wrapper .community_main_right {
+  width: 25vw;
+}
+
+.community_description {
+  width: 55vw;
+  padding: 8px 20px 20px;
+  margin-left: 7vw;
+  background-color: #F5F5F5;
+}
+
+.community_description h2 {
+  margin: 0 auto 0 2vw;
+}
+
+.community_description .community_description_text {
+  width: 55vw;
+  background-color: #FFFFFF;
+}
+
+.community_description .community_description_text p {
+  padding: 13px;
+  margin: 0;
+}
+
+.community_main_event {
+  width: 65vw;
+  margin-left: 4vw;
+}
+
+.community_main_event .community_event_status {
+  border-bottom: solid 3px #F5F5F5;
+}
+
+.community_main_event .community_event_status h2 {
+  margin-left: 4vw;
+}
+
+.community_event {
+  width: 65vw;
+  height: 180px;
+  display: flex;
+  border-bottom: solid 3px #F5F5F5;
+}
+
+.community_event .community_event_image {
+  width: 20vw;
+  height: 180px;
+  position: relative;
+}
+
+.community_event .community_event_image img {
+  width: 16vw;
+  height: 120px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.community_event .community_event_separator {
+  width: 3px;
+  height: 140px;
+  margin-top: 20px;
+  background-color: #F5F5F5;
+}
+
+.community_event .community_event_text {
+  width: 43.5vw;
+  margin: 5px auto 3vw 10px;
+  position: relative;
+}
+
+.community_event .community_event_text h2 {
+  margin: 28px 0 7px 8px;
+}
+
+.community_event .community_event_text .community_event_description {
+  margin-bottom: 16px;
+}
+
+.community_event .community_event_text p {
+  margin: 0;
+}
+
+.community_event .community_event_text .community_event_info {
+  display: flex;
+}
+
+.community_event .community_event_text .community_event_info p {
+  margin-right: 20px;
+}
+
+.community_event .community_event_text .community_event_info p .material-icons {
+  font-size: 16px;
+  transform: translateY(2px);
+}
+
+.community_event .community_event_text .community_event_info img {
+  width: 18px;
+  height: 18px;
+}
+
+.community_event .community_event_text .community_event_time {
+  display: flex;
+  position: absolute;
+  top: 28px;
+  right: 50px;
+}
+
+.community_event .community_event_text .community_event_time p {
+  margin-right: 2px;
+}
+
+.community_main_right_inner {
+  width: 21vw;
+  padding: 30px 20px;
+  margin-left: 0;
+  transform: translateX(-30px);
+  background-color: #F5F5F5;
+  text-align: center;
+}
+
+.community_main_enterButton {
+  width: 21vw;
+  height: 80px;
+  border: none;
+  border-radius: 10px;
+  background-color: #5bc4f2;
+  color: #FFFFFF;
+  font-size: 28px;
+}
+
+.community_main_enterButton:hover {
+  transition: 0.3s;
+  background-color: #7CCEF2;
+}
+
+.community_members h3 {
+  margin: 50px 0 5px;
+}
+
+.community_members .community_members_images {
+  width: 19vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.community_members .community_members_images .community_members_images_line {
+  width: 19vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.community_members .community_members_images .community_members_images_line img {
+  width: 30px;
+  height: 30px;
+}
+
+.community_main_links h3 {
+  margin: 50px 0 5px;
+}
+
+.community_main_links .community_links_bg {
+  width: 19vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  background-color: #FFFFFF;
+}
+
+.community_main_links .community_links_bg ul {
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.community_main_links .community_links_bg ul li {
+  border-bottom: solid 2px #F5F5F5;
+}
+
+.community_main_links .community_links_bg ul li a {
+  margin-left: 10px;
+  color: #000000;
+  text-decoration: none;
+}
+
+.community_main_links .community_links_bg ul li a img {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  transform: translateY(3px);
+}
+
+/* 以下使用不可 */
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+header {
+  width: 100vw;
+  height: 88px;
+  background-color: #651FFF;
+}
+
+footer {
+  width: 100vw;
+  height: 128px;
+  background-color: #1C2DFF;
+}

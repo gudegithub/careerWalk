@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class UserEventMailer < ApplicationMailer
 
   def creation_email(user, event)

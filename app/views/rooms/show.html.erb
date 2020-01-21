@@ -1,0 +1,9 @@
+
+<p><%= "ルーム名：#{@room.name}" %></p>
+
+<input type="text" data-behavior="room_speaker" data-user="<%= current_user.id %>" data-room="<%= @room.id %>">
+
+<div id="posts">
+
+  <%= render "post", collection: @posts %>
+</div>

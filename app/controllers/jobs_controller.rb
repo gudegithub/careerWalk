@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class JobsController < ApplicationController
   before_action :authenticate_user! ,only: [:new, :create]	
    def index

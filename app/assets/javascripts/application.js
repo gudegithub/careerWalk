@@ -28,8 +28,27 @@
 //= require moment
 //= require fullcalendar
 //= require fullcalendar/lang/ja
+//= require select2
+
 
 $(document).ready(function(){
   $('#calendar').fullCalendar({
   });
 });
+
+$(document).ready(function() {
+  $('.mySelect2').select2();
+});
+
+$(document).ready(function() {
+  $('.mySelect2').select2({
+    maximumSelectionLength: 3,
+	  width: 300,
+    placeholder: 'This is my placeholder',
+    allowClear: true
+  });
+});
+
+$(function(){
+  setTimeout("$('.alert').fadeOut('slow')", 1000)
+})

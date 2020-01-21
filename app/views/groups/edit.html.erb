@@ -1,0 +1,50 @@
+<div class="communityEdit_container">
+      <div class="communityEdit_headerImage_wrapper">
+        <img class="communityEdit_headerImage" src="paper.jpg" alt="header image">
+      </div>
+
+      <div class="communityEdit_profile_wrapper">
+        <div class="communityEdit_profile">
+          <img class="communityEdit_profile_image" src="blueSmoke.jpg" alt="">　
+          <div class="communityEdit_profile_text">
+            <h1><%=@group.name%></h1>
+            <div class="communityEdit_profile_tags">
+              <a href="#"><i class="material-icons">local_offer</i>Node.js<button type="button" name="button"><i class="material-icons">clear</i></button></a>
+              <a href="#"><i class="material-icons">local_offer</i>React<button type="button" name="button"><i class="material-icons">clear</i></button></a>
+              <a href="#"><i class="material-icons">local_offer</i>Javascript<button type="button" name="button"><i class="material-icons">clear</i></button></a>
+              <a href="#"><i class="material-icons">local_offer</i>Redux<button type="button" name="button"><i class="material-icons">clear</i></button></a>
+            </div>
+          </div>
+          <button class="communityEdit_profileEditButton" type="button" name="button">タグの追加</button>
+          <input type="text" name="" value="">
+        </div>
+      </div>
+
+      <div class="communityEdit_description">
+        <h2>コミュニティの説明</h2>
+        <%= form_with model: @group ,local: true do |form| %>
+
+          <div class="form-group">
+
+            <%= form.text_area :description, placeholder: "詳細", class: "form-control" %>
+          
+          </div>
+          <button <%=form.submit "更新" %>更新</button>
+        <% end %>
+      </div>
+
+      <div class="communityEdit_links">
+        <h2>リンク</h2>
+        <!-- 項目を選んで追加できるようにした方がいいかもしれない -->
+        <ul>
+          <li><p>twitter</p><input type="text" name="" value=""></li>
+          <li><p>GitHub</p><input type="text" name="" value=""></li>
+          <li><p>Youtube</p><input type="text" name="" value=""></li>
+          <li><p>その他</p><input type="text" name="" value=""></li>
+          <li><p>その他</p><input type="text" name="" value=""></li>
+          <li><p>その他</p><input type="text" name="" value=""></li>
+        </ul>
+        <button>更新</button>
+      </div>
+
+    </div>

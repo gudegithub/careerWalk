@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddLonLatAddressLimitToEvents < ActiveRecord::Migration[5.2]
   def change
     add_column :events, :lat, :float
