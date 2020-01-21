@@ -31,4 +31,17 @@ class Event < ApplicationRecord
 
  # geocoded_by :address
  # after_validation :geocode
+
+ # カテゴリーを加える
+ def add_category(category)
+  categories << category
+ end
+  # イベントに登録されているカテゴリーの削除
+ def delete_category(category)
+   event_categories.find_by(category: category.id).destroy
+ end
+ # イベントにそのカテゴリーが含まれるか確認する
+ def category_include?(category)
+   categories.include?(category)
+ end
 end

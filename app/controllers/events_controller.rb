@@ -36,14 +36,19 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @categories = Category.all
   end
 
   def create
+    @categories = Category.all
     @event = Event.new(status: :"published")
     @event = Event.new(event_params)
     @event.adminUser = current_user.id
-
+    categories = Category.where(event_category_name_params)
     if @event.save
+      categories.each do |c|
+        @event.add_category(c)
+      end
       flash[:success] ="作成しました"
       redirect_to @event
     else
@@ -95,6 +100,11 @@ class EventsController < ApplicationController
   private
     def event_params
       params.require(:event).permit(:title, :location,:address,:lat,:lon,:description, :started_at, :ended_at,:status)
+    end
+
+    def event_category_name_params
+      # params.require(:event).permit(:category)
+      params.require(:category).permit(:name)
     end
 
     def set_event

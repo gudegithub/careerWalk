@@ -28,9 +28,9 @@ Rails.application.routes.draw do
   end
   resources :users
   resources :user_events, only: [:create, :destroy]
-
-  #resources :rooms
-
+  resources :event_category, only: [:create, :destroy]
+  get 'category/:name', to: 'category#show', as: 'category'
+  get 'categories', to: 'category#index', as: 'categories'
   resources :groups
   resources :user_groups,only: [:create, :destroy]
 

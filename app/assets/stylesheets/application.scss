@@ -10,15 +10,37 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require select2
+ *= require select2-bootstrap
  *= require fullcalendar
  *= require_tree .
+
+
 
  */
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "events";
 
 p {
   padding: 0;
   margin: 0;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+header {
+  width: 100vw;
+  height: 88px;
+  background-color: #2680EB;
+}
+
+footer {
+  width: 100vw;
+  height: 128px;
+  background-color: #2680EB;
 }

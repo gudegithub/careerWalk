@@ -1,159 +1,119 @@
-
-    <div class="eventDetails_wrapper">
-      <div class="eventDetails_left">
-        <div class="eventDetails_title">
-          <div class="eventDetails_title_date">
-            <div class="event_title_wrap">
-              <h2 class="event_show_title">
-                <span class="event_date_budge">
-                  <% event_date =  @event.started_at.to_date  %>
-                  <p class="month"><%= l(event_date, format: :just_month) %></p>
-                  <p class="day"><%= l(event_date, format: :just_date) %></p>
-                </span>
-                <%= @event.title %>
-              </h2>
-              <% if @event.image %>
-                <div class ="thumbnail" style - "background-image:url(<%=@event.image%>)"></div>
-              <% elsif @event.site == "doorkeeper" %>
-                  <div class="thumbnail">
-                    <%= image_tag("doorkeeper.png",style: "margin: 104px auto", width: "360px")%>
-                  </div>
-              <% elsif @event.site == "connpass" %>
-                <div class = "thumbnail">
-                  <%= image_tag("connpass.png",style: "margin: 71px auto")%>
-                </div>
-              <% end %>
-
-
-            </div>
-
-
-          </div>
-           <h2><%=@event.title%></h2>
-          <img src="paper.jpg" alt="">
-        </div>
-
-        <div class="eventDetails_detail">
-          <h2>イベント詳細</h2>
-          <div class="eventDetails_detail_text">
-            <p>イベント概要<br>
-              <% if @event.site == "connpass" || @event.site == "doorkeeper"%>
-                <% @event.description %><br>
-              <% else %>
-                <%= @event.description  %>
-              <% end %><br>
-
-                　イベントスケジュール<br>
-                ・14:00～　集合・会場開け<br>
-                ・14:30～　自己紹介<br>
-                ・17:00～　LT<br>
-                ・19:00～　懇親会<br>
-            </p>
-            <div class="event_detail_content">
-              <% if @event.adminUser != nil %>
-                  <%=link_to "編集", edit_event_path(@event)%>
-                  <% end %>
-              <% if @event.site %>
-                <div class="event_detail_btn">
-                  <%= link_to "詳細を確認する", @event.url %>
-                </div>
-
-
-              <% end %>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="eventDetails_document">
-          <h2>イベント資料</h2>
-        <div class="eventDetails_links">
-            <div class="eventDetails_links_item">
-              <a href="#"><p><i class="material-icons">folder</i>Rails_tutorial.zip</p></a>
-            </div>
-            <div class="eventDetails_links_item">
-              <a href="#"><p><i class="material-icons">folder</i>Rails_devise.zip</p></a>
-            </div>
-          </div>
-        </div>
+<div class="eventDetails_wrapper">
+  <div class="eventDetails_left">
+    <div class="eventDetails_title">
+      <div class="eventDetails_title_date">
+        <% event_date =  @event.started_at.to_date  %>
+        <p class="month"><%= l(event_date, format: :just_month) %></p>
+        <p class="day"><%= l(event_date, format: :just_date) %></p>
       </div>
-
-      <div class="eventDetails_right">
-
-          <div class="eventDetails_location">
-            <h3><%= icon "fas", "map-marker-alt", class: "mr-2" %>会場</h3>
-            <p class="event_location"><%= @event.location %></p>
-
-            <div id="map"></div>
-
-              <script>
-                handler = Gmaps.build("Google");
-                handler.buildMap({provider: {},internal: {id: 'map'}},function(){
-                  markers = handler.addMarkers(<%=raw @hash.to_json %>);
-                  handler.bounds.extendWith(markers);
-                  handler.fitMapToBounds();
-                  handler.getMap().setZoom(17);
-                });
-              </script>
-
-
-
-            </div>
-
-          <div class = "eventDetails_application">
-            <div class ="event_Details_application_state">
-              <% if @event.started_at>Time.now%>
-                <p style="background: #FFCC66;">開催前</p>
-              <% else %>
-              <p ><%= l(@event.started_at,format: :just_time)%>開始</p>
-              <p ><span></span><%= l(@event.ended_at,format: :just_time)%>終了</p>
-                <p style = "background: #aaa>"終了</p>
-              <% end %>
-
-          </div>
+      <h2 class="event_show_title">
+        <%= @event.title %>
+      </h2>
+      <% if @event.image %>
+        <div class="thumbnail" style="background-image: url(<%= @event.image %>)"></div>
+      <% elsif @event.site == "doorkeeper" %>
+        <div class="thumbnail">
+          <%= image_tag("doorkeeper.png", style: "margin: 104px auto", width: "360px") %>
         </div>
-
-
-
-        <div class="eventDetails_owner">
-          <h2>運営</h2>
-          <div class="eventDetails_owner_main">
-            <p>株式会社Gude</p>
-            <img src="logo.png" alt="">
-            <a href="https://gude.jp">https://gude.jp</a>
-          </div>
+      <% elsif @event.site == "connpass" %>
+        <div class="thumbnail">
+          <%= image_tag("connpass.png", style: "margin: 71px auto") %>
         </div>
-        <% if @event.site == nil %>
-        <div class="user_event_attend">
+      <% end %>
+    </div>
 
-            <% if @user_event %>
-              <div class="event_attend_button">
-                <%= button_to "イベントの参加を取り消す", {controller: 'user_events', action: 'destroy'},
-                                                      { method: :delete, params: { event_id: @event.id } } %>
-              </div>
-            <% else %>
-              <div class="event_attend_button">
-      　　　　　　<%= button_to "イベントに参加する", {controller: 'user_events', action: 'create'},
-                                                 { method: :post, params: { event_id: @event.id } } %>
-              </div>
-            <% end %>
-
-        </div>
-
-        <div class="eventDetails_participant">
-          <h2>参加者</h2>
-          <div class="eventDetails_participant_itemWrapper">
-            <div class="eventDetails_participant_item">
-
-            </div>
-            <div class="eventDetails_participant_item">
-               <% @users.each do |user|%>
-               <img src=<%=user.image%> alt="">
-              
-               <% end %>
-            </div>
-            <% end %>
+    <div class="eventDetails_detail">
+      <h2>イベント詳細</h2>
+      <div class="eventDetails_detail_text">
+        <% if @event.site %>
+          <div class="event_detail_btn">
+            <%= link_to "詳細を確認する", @event.url %>
           </div>
+        <% else %>
+          <%= markdown(@event.description).html_safe %>
+        <% end %>
+      </div>
+    </div>
+
+    <% if @event.categories %>
+      <table class="table table-bordered">
+        <tr>
+          <% @event.categories.each do |category| %>
+            <td><%= link_to category.name, category_path(category.name) %></td>
+          <% end %>
+        </tr>
+      </table>
+    <% end %>
+
+
+    <div class="eventDetails_document">
+      <h2>イベント資料</h2>
+      <div class="eventDetails_links">
+        <div class="eventDetails_links_item">
+          <a href="#"><p><i class="material-icons">folder</i>Rails_tutorial.zip</p></a>
+        </div>
+        <div class="eventDetails_links_item">
+          <a href="#"><p><i class="material-icons">folder</i>Rails_devise.zip</p></a>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="eventDetails_right">
+    <div class="eventDetails_location">
+      <h3><%= icon "fas", "map-marker-alt", class: "mr-2" %>会場</h3>
+      <p class="event_location"><%= @event.location %></p>
+      <div id="map">
+        <script>
+          handler = Gmaps.build("Google");
+          handler.buildMap({provider: {},internal: {id: 'map'}},function(){
+            markers = handler.addMarkers(<%=raw @hash.to_json %>);
+            handler.bounds.extendWith(markers);
+            handler.fitMapToBounds();
+            handler.getMap().setZoom(17);
+          });
+        </script>
+      </div>
+    </div>
+
+    <div class="eventDetails_application">
+      <div class="eventDetails_application_state">
+        <p>開催前</p>
+      </div>
+      <p><%= @event.started_at.to_s(:date) %></p>
+      <p><span><%= @event.started_at.to_s(:time_jp) %></span>～<%= @event.ended_at.to_s(:time_jp) %></p>
+      <% if @user_event %>
+          <%= button_to "イベントの参加を取り消す", {controller: 'user_events', action: 'destroy'},
+                                                { method: :delete, params: { event_id: @event.id } } %>
+      <% else %>
+　　　　　　<%= button_to "イベントに参加する", {controller: 'user_events', action: 'create'},
+                                           { method: :post, params: { event_id: @event.id } } %>
+      <% end %>
+    </div>
+
+    <div class="eventDetails_owner">
+      <h2>運営</h2>
+      <div class="eventDetails_owner_main">
+        <p>株式会社Gude</p>
+        <img src="logo.png" alt="">
+        <a href="#">https://gude.jp</a>
+      </div>
+    </div>
+
+    <div class="eventDetails_participant">
+      <h2>参加者</h2>
+      <% if @event.users %>
+        <%  @event.users.each do |user| %>
+          <div class="eventDetails_participant_itemWrapper">
+            <div class="eventDetails_participant_item">
+              <img src=<%=user.image%> alt="">
+              <p><%= user.name %></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,53 @@
+<div class="event_wrapper">
+  <div class="container">
+    <div class="main_content">
+      <h1><%= @category.name %></h1>
+      <div id="calendar"></div>
+      <div class="events">
+        <% last_date = nil  %>
+        <% @events.each do |event| %>
+          <% event_date =  event.started_at.to_date  %>
+          <% if event_date != last_date %>
+            <div class="date_bar">
+              <%= l(event_date, format: :long)  %>
+            </div>
+            <% end %>
+            <% last_date = event_date  %>
+          <div class="event">
+            <div class="event_image">
+              <%= link_to(event_path(event)) do %>
+                <% if event.image  %>
+                  <%= image_tag event.image, width: "220px", height: "130xp"  %>
+                <% elsif event.site %>
+                  <div class="site_logo">
+                    <% if event.site == "doorkeeper" %>
+                      <%= image_tag "doorkeeper.png", width: "140px", height: "30px" %>
+                    <% elsif event.site == "connpass" %>
+                      <%= image_tag("connpass.png", width: "120px", height: "40px") %>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="event_detail">
+              <%= link_to "#{event.title}",event_path(event), class: "event_title" %>
+              <div class="event_site">
+              </div>
+              <div class="event_time">
+                <%= l(event.started_at, format: :just_time) %><span>~</span>
+              </div>
+              <div class="event_address">
+                <%= icon "fas", "map-marker-alt" %><%= event.location  %>
+              </div>
+              <div class="event_owner">
+                <p><%= event.owner %></p>
+              </div>
+            </div>
+          </div>
+        <% end  %>
+      </div>
+      <div class="side_content">
+      </div>
+    </div>
+  </div>
+  <%= paginate @events  %>

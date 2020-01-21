@@ -1,5 +1,16 @@
 ja:
   activerecord:
+    attributes:
+      user:
+        name: 名前
+        password: パスワード
+        password_confirmation: パスワード（確認）
+      event:
+        title: タイトル
+        description: イベント詳細
+        location: イベント開催地
+        started_at: イベント開始日時
+        ended_at: イベント終了日時
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
