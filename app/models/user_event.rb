@@ -2,4 +2,16 @@
 class UserEvent < ApplicationRecord
   belongs_to :user
   belongs_to :event
+
+  #出席状態を確認するenum
+  enum attend_status: { before_join: 0, after_join: 1 }
+
+  #出席の状態を切り替えるメソッド
+  def check_attend!
+    if before_join?
+      after_join!
+    else
+      before_join!
+    end
+  end
 end

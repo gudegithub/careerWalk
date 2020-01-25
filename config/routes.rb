@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   end
   resources :users
   resources :user_events, only: [:create, :destroy]
+  patch 'check_attend', to: 'user_events#check_attend'
   resources :event_category, only: [:create, :destroy]
   get 'category/:name', to: 'category#show', as: 'category'
   get 'categories', to: 'category#index', as: 'categories'

@@ -5,5 +5,6 @@ class CompaniesController < ApplicationController
   end
 
   def show
+    
   end
 end

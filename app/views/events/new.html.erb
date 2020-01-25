@@ -20,23 +20,10 @@
         <%= form.label :started_at %>
         <br>
         <%= form.datetime_select :started_at, {} %>
-        <%= form.label :address %>
-        <%= form.text_field :address, placeholder: "住所", class: "form-control" %>
-      </div>
-
-
-      <div class="form-group">
-        <%= form.label :ended_at %>
-        <br>
-        <%= form.label :started_at,"開始時間" %>
-        <%= form.datetime_select :started_at, {},:default => Time.now,
-                :order => [:day, :month, :year,:hour,:minutes],
-                :start_year => Time.now.year,
-                :end_year => Time.now.year + 3,
-                :id => 'started_at' %>
       </div>
       <div class="form-group">
         <%= form.label :ended_at,"終了時間" %>
+        <br>
         <%= form.datetime_select :ended_at, {} %>
       </div>
       <div class="form-group">

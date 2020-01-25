@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class UserEventsController < ApplicationController
    before_action :authenticate_user! ,only: [:delete, :create]
+
   def create
     user = current_user
     @event = Event.find(params[:event_id])
@@ -20,5 +21,20 @@ class UserEventsController < ApplicationController
       render event_path(@event)
     end
   end
+
+  #出席状態切替アクション
+  def check_attend
+    user = User.find(params[:user_id])
+    @event = Event.find(params[:event_id])
+    
+    # 中間テーブルを探し出す
+    ue = user.user_events.find_by(event_id: @event.id)
+
+    # 出席状態切替メソッド呼び出し
+    ue.check_attend!
+    redirect_to event_path(@event)
+  end
+
+
 
 end

@@ -16,22 +16,25 @@ class EventsController < ApplicationController
 
 
   def show
-    @user = current_user
-    @event = Event.find(params[:id])
-    @users = @event.users
-    @participants = User.where(id: @event.users)
-    @user_event = UserEvent.find_by(event_id: @event.id, user_id: current_user.id) if current_user
-    @participants = User.where(id: @users.name)
-    @address = @event.address
+    if current_user
+      @user = current_user
+      @event = Event.find(params[:id])
+      @users = @event.users
+      @participants = User.where(id: @event.users)
+      @user_event = UserEvent.find_by(event_id: @event.id, user_id: current_user.id) if current_user
+      @participants = User.where(id: @users.name)
+      @address = @event.address
 
 
-
-    @hash = Gmaps4rails.build_markers(@event) do |event, marker|
-      marker.lat event.lat
-      marker.lng event.lon
-      marker.infowindow event.address
+      @hash = Gmaps4rails.build_markers(@event) do |event, marker|
+        marker.lat event.lat
+        marker.lng event.lon
+        marker.infowindow event.address
+      end
+    else
+      flash[:info] = "ログインしてください"
+      redirect_to user_session_path
     end
-
   end
 
   def new
